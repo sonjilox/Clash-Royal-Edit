@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Clash Royale Web</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app-container">
+  <div id="lobby">
+    <div class="top-bar">
+      <div class="res trophies">🏆 <span id="trophy-count">0</span></div>
+    </div>
+    <div id="main-screen" class="screen">
+      <h1 class="arena-title">АРЕНА 1</h1>
+      <button id="play-btn" onclick="startBattle()">В БОЙ!</button>
+    </div>
+  </div>
+</div>
+<script>
+function startBattle(){
+  localStorage.setItem('selectedDeck', JSON.stringify([0,1,2,3]));
+  location.href='game.html';
+}
+</script>
+</body>
+</html>
