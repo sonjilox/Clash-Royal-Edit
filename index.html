@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Clash Royale - Lobby</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app-container">
+    <div id="lobby">
+
+        <div class="top-bar">
+            <div class="res gold">💰 <span id="gold">1000</span></div>
+            <div class="res trophies">🏆 <span id="trophy-count">0</span></div>
+        </div>
+
+        <div id="main-screen" class="screen">
+            <div style="text-align:center; margin-top:80px;">
+                <h1 style="font-size:36px; text-shadow:2px 4px #000;">АРЕНА 1</h1>
+                <div style="font-size:100px;">⚔️</div>
+            </div>
+
+            <div class="play-button-container">
+                <button id="play-btn" onclick="startBattle()">В БОЙ!</button>
+            </div>
+        </div>
+
+        <div id="deck-screen" class="screen" style="display:none;">
+    <div class="deck-editor">
+        <h3 style="text-align:center; margin-top:20px;">ВАША КОЛОДА</h3>
+
+        <div id="current-deck" class="card-grid"></div>
+
+        <h4 style="text-align:center; margin: 20px 0 10px 0;">ВСЕ КАРТЫ</h4>
+
+        <div id="all-cards" class="card-grid"></div>
+
+        <div style="text-align:center; padding: 40px 0 100px 0;">
+            <button class="reset-btn" onclick="resetDeck()">ОЧИСТИТЬ</button>
+        </div>
+    </div>
+</div>
+
+        <div class="footer-nav">
+            <button class="nav-btn" onclick="showScreen('deck')">🃏</button>
+            <button class="nav-btn active" onclick="showScreen('main')">⚔️</button>
+            <button class="nav-btn">🛡️</button>
+        </div>
+
+    </div>
+</div>
+
+<script src="game.js"></script>
+<script>
+function showScreen(type) {
+    document.getElementById('main-screen').style.display = type === 'main' ? 'block' : 'none';
+    document.getElementById('deck-screen').style.display = type === 'deck' ? 'block' : 'none';
+
+    // Обновляем активную кнопку
+    const btns = document.querySelectorAll('.nav-btn');
+    btns[0].classList.toggle('active', type === 'deck');
+    btns[1].classList.toggle('active', type === 'main');
+}
+
+function startBattle() {
+    const deck = JSON.parse(localStorage.getItem('userDeck')) || [];
+    if (deck.length !== 8) {
+        alert("Вам нужно выбрать ровно 8 карт!");
+        return;
+    }
+    localStorage.setItem('selectedDeck', JSON.stringify(deck));
+    window.location.href = 'game.html';
+}
+</script>
+
+</body>
+</html>
