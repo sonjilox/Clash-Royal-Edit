@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Clash Royale Web Arena (Canvas)</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="app">
+    <canvas id="game" aria-label="Game Canvas"></canvas>
+
+    <div id="overlay">
+      <!-- MAIN MENU -->
+      <section id="menuMain" class="screen active">
+        <div class="logoWrap">
+          <div class="logoBadge">CR</div>
+          <div class="logoTitle">CLASH ROYALE</div>
+          <div class="logoSub">WEB ARENA • CANVAS 2D</div>
+        </div>
+
+        <button id="btnPlay" class="btn primary pulse">PLAY</button>
+        <button id="btnDeck" class="btn">DECK</button>
+        <button id="btnSettings" class="btn">SETTINGS</button>
+
+        <div class="menuHint">
+          <div class="hintLine">• Выбери 8 карт в DECK</div>
+          <div class="hintLine">• В бою карты снизу, эликсир фиолетовый</div>
+          <div class="hintLine">• Пересечение реки только по мостам</div>
+        </div>
+
+        <div class="footerNote">No images • No SVG • No libraries</div>
+      </section>
+
+      <!-- DECK -->
+      <section id="menuDeck" class="screen">
+        <div class="topbar">
+          <button class="iconbtn" id="deckBack" title="Back">←</button>
+          <div class="topTitle">
+            <div class="topTitleMain">DECK</div>
+            <div class="topTitleSub">Pick 8 cards (max 8)</div>
+          </div>
+          <div class="topSpacer"></div>
+        </div>
+
+        <div class="deckPane">
+          <div class="deckSelectedTitle">Selected (8)</div>
+          <div id="deckSelected" class="deckSelected"></div>
+
+          <div class="deckAllTitle">All Cards</div>
+          <div id="allCardsGrid" class="grid"></div>
+        </div>
+
+        <div class="bottomActions">
+          <button id="deckBack2" class="btn">BACK</button>
+        </div>
+      </section>
+
+      <!-- SETTINGS -->
+      <section id="menuSettings" class="screen">
+        <div class="topbar">
+          <button class="iconbtn" id="settingsBack" title="Back">←</button>
+          <div class="topTitle">
+            <div class="topTitleMain">SETTINGS</div>
+            <div class="topTitleSub">Mobile-style UI</div>
+          </div>
+          <div class="topSpacer"></div>
+        </div>
+
+        <div class="settingsPane">
+          <div class="settingCard">
+            <div class="settingRow">
+              <div class="settingLabel">Volume (stub)</div>
+              <div class="settingValue"><span id="volValue">80</span>%</div>
+            </div>
+            <input id="volume" class="slider" type="range" min="0" max="100" value="80" />
+            <div class="settingDesc">Заглушка (звук не используется), но UI как в мобильной игре.</div>
+          </div>
+
+          <div class="settingCard">
+            <div class="settingRow">
+              <div class="settingLabel">Fullscreen</div>
+              <div class="settingValue">ON/OFF</div>
+            </div>
+            <button id="btnFullscreen" class="btn primary">TOGGLE FULLSCREEN</button>
+            <div class="settingDesc">Работает по кнопке (Fullscreen API).</div>
+          </div>
+        </div>
+
+        <div class="bottomActions">
+          <button id="settingsBack2" class="btn">BACK</button>
+        </div>
+      </section>
+
+      <!-- HUD (IN MATCH) -->
+      <section id="hud" class="hud hidden">
+        <div class="hudTop">
+          <div class="hudBadge enemy">
+            <div class="hudName">ENEMY</div>
+            <div class="hudMini" id="enemyMini">Elixir: 0</div>
+          </div>
+
+          <button id="btnExit" class="smallbtn" title="Exit to menu">≡</button>
+
+          <div class="hudBadge you">
+            <div class="hudName">YOU</div>
+            <div class="hudMini" id="youMini">Elixir: 0</div>
+          </div>
+        </div>
+
+        <div id="placementHint" class="placementHint hidden">
+          Tap on your side to deploy • Water is forbidden • Cross only via bridges
+        </div>
+
+        <div class="hudBottom">
+          <div class="elixirBox">
+            <div class="elixirLabel">ELIXIR</div>
+            <div class="elixirBar">
+              <div id="elixirFill" class="elixirFill"></div>
+            </div>
+            <div id="elixirNum" class="elixirNum">0</div>
+          </div>
+
+          <div class="handBox">
+            <div id="handRow" class="cardsRow"></div>
+            <div class="nextWrap">
+              <div class="nextTitle">NEXT</div>
+              <div id="nextCard" class="nextCard"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- GAME OVER -->
+      <section id="gameOver" class="screen gameover">
+        <div class="goPanel">
+          <div id="gameOverTitle" class="goTitle">VICTORY!</div>
+          <div id="gameOverSub" class="goSub">King Tower destroyed</div>
+          <button id="btnReplay" class="btn primary">PLAY AGAIN</button>
+          <button id="btnBackMenu" class="btn">MAIN MENU</button>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>
