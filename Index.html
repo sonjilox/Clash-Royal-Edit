@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>Clash Royale Web</title>
+
+  <!-- ============================= -->
+  <!-- КУДА ВСТАВЛЯТЬ СТИЛИ -->
+  <!-- style.css подключается здесь -->
+  <!-- ============================= -->
+  <link rel="stylesheet" href="style.css" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+</head>
+<body>
+
+  <!-- ============================= -->
+  <!-- MAIN MENU -->
+  <!-- ============================= -->
+  <div id="menu" class="menu">
+    <div class="menu-panel">
+
+      <h1 class="title">Clash Royale</h1>
+
+      <button id="btnPlay" class="menu-btn primary">
+        ▶ Play
+      </button>
+
+      <button id="btnDeck" class="menu-btn">
+        🃏 Deck
+      </button>
+
+      <button id="btnSettings" class="menu-btn">
+        ⚙ Settings
+      </button>
+
+    </div>
+  </div>
+
+  <!-- ============================= -->
+  <!-- DECK MENU -->
+  <!-- ============================= -->
+  <div id="deckMenu" class="menu hidden">
+    <div class="menu-panel large">
+
+      <h2>Choose Your Deck (8 cards)</h2>
+
+      <div id="allCards" class="cards-grid">
+        <!-- Все карты добавляются через JS -->
+      </div>
+
+      <div class="deck-actions">
+        <button id="btnSaveDeck" class="menu-btn primary">Save</button>
+        <button id="btnBackFromDeck" class="menu-btn">Back</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ============================= -->
+  <!-- SETTINGS MENU -->
+  <!-- ============================= -->
+  <div id="settingsMenu" class="menu hidden">
+    <div class="menu-panel">
+
+      <h2>Settings</h2>
+
+      <div class="setting">
+        <label>Volume</label>
+        <input id="volume" type="range" min="0" max="100" value="50" />
+        <span id="volVal">50%</span>
+      </div>
+
+      <button id="btnFullscreen" class="menu-btn">
+        ⛶ Fullscreen
+      </button>
+
+      <button id="btnBackFromSettings" class="menu-btn">
+        Back
+      </button>
+
+    </div>
+  </div>
+
+  <!-- ============================= -->
+  <!-- GAME UI -->
+  <!-- ============================= -->
+  <div id="gameUI" class="hidden">
+
+    <div id="topMsg" class="top-msg"></div>
+
+    <canvas id="game"></canvas>
+
+    <!-- Elixir bar -->
+    <div class="elixir-bar">
+      <div class="elixir-fill" id="elixirFill"></div>
+      <span id="elixirText">0 / 10</span>
+    </div>
+
+    <!-- Deck in battle -->
+    <div id="deck" class="deck">
+      <!-- Карты выбранной колоды -->
+    </div>
+
+  </div>
+
+  <!-- ============================= -->
+  <!-- КУДА ВСТАВЛЯТЬ JS -->
+  <!-- game.js подключается здесь -->
+  <!-- ============================= -->
+  <script src="game.js"></script>
+
+</body>
+</html>
