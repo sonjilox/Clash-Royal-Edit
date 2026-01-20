@@ -1,0 +1,283 @@
+/* =========================================================
+   GLOBAL RESET & BASE
+========================================================= */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  background: #0b1220;
+  color: #eaf0ff;
+  font-family: Arial, Helvetica, sans-serif;
+  overflow: hidden;
+}
+
+/* =========================================================
+   CANVAS
+========================================================= */
+#game {
+  display: none;
+  width: 100vw;
+  height: 100vh;
+  background: #0b1220;
+  touch-action: none;
+}
+
+/* =========================================================
+   MENUS (COMMON)
+========================================================= */
+.menu {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(
+    circle at top,
+    #1e293b,
+    #020617
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+}
+
+.menu.hidden {
+  display: none;
+}
+
+.menu-panel {
+  background: rgba(15, 23, 42, 0.95);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 18px;
+  padding: 28px 26px;
+  width: 92%;
+  max-width: 360px;
+  text-align: center;
+  box-shadow: 0 25px 80px rgba(0,0,0,0.6);
+}
+
+.menu-panel.large {
+  max-width: 620px;
+}
+
+/* =========================================================
+   TITLES & TEXT
+========================================================= */
+.title {
+  font-size: 32px;
+  margin-bottom: 22px;
+  letter-spacing: 1px;
+}
+
+h2 {
+  margin-bottom: 18px;
+  font-size: 22px;
+}
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+.menu-btn {
+  width: 100%;
+  margin-top: 12px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.18);
+  background: linear-gradient(
+    180deg,
+    rgba(255,255,255,0.08),
+    rgba(255,255,255,0.02)
+  );
+  color: #eaf0ff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.menu-btn:hover {
+  transform: translateY(-1px);
+}
+
+.menu-btn:active {
+  transform: scale(0.97);
+}
+
+.menu-btn.primary {
+  background: linear-gradient(
+    180deg,
+    #3b82f6,
+    #1d4ed8
+  );
+  border-color: rgba(255,255,255,0.3);
+}
+
+/* =========================================================
+   SETTINGS
+========================================================= */
+.setting {
+  margin: 16px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.setting label {
+  font-size: 14px;
+}
+
+.setting input[type="range"] {
+  flex: 1;
+}
+
+/* =========================================================
+   GAME UI WRAPPER
+========================================================= */
+#gameUI {
+  position: fixed;
+  inset: 0;
+}
+
+#gameUI.hidden {
+  display: none;
+}
+
+/* =========================================================
+   TOP MESSAGE
+========================================================= */
+.top-msg {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0,0,0,0.45);
+  padding: 6px 14px;
+  border-radius: 10px;
+  font-size: 13px;
+  z-index: 20;
+}
+
+/* =========================================================
+   ELIXIR BAR
+========================================================= */
+.elixir-bar {
+  position: absolute;
+  bottom: 92px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 220px;
+  height: 16px;
+  border-radius: 10px;
+  background: rgba(0,0,0,0.45);
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.18);
+  z-index: 20;
+}
+
+.elixir-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(
+    90deg,
+    #a855f7,
+    #7c3aed
+  );
+  transition: width 0.15s linear;
+}
+
+.elixir-bar span {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+}
+
+/* =========================================================
+   DECK (IN BATTLE)
+========================================================= */
+.deck {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 20;
+}
+
+.card {
+  width: 68px;
+  height: 86px;
+  border-radius: 12px;
+  background: linear-gradient(
+    180deg,
+    rgba(255,255,255,0.12),
+    rgba(255,255,255,0.04)
+  );
+  border: 1px solid rgba(255,255,255,0.25);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 6px;
+  cursor: pointer;
+  font-size: 11px;
+}
+
+.card.selected {
+  outline: 2px solid #3b82f6;
+}
+
+.card.disabled {
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+.card .name {
+  font-size: 10px;
+  line-height: 1.1;
+}
+
+.card .cost {
+  text-align: center;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+/* =========================================================
+   DECK MENU GRID
+========================================================= */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(72px, 1fr));
+  gap: 10px;
+  margin-top: 14px;
+  max-height: 300px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.cards-grid .card {
+  height: 92px;
+}
+
+.cards-grid .card.selected {
+  outline: 2px solid #22c55e;
+}
+
+/* =========================================================
+   SCROLLBAR (MOBILE FRIENDLY)
+========================================================= */
+.cards-grid::-webkit-scrollbar {
+  width: 6px;
+}
+
+.cards-grid::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.2);
+  border-radius: 6px;
+}
